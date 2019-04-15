@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from shadowbot.cogs import Cog
+from shadowbot.messages.bot_messages import DeletableMessage
 
 
 # https://gist.github.com/BananaWagon/068cef8ff640e90d3636d133fa8f72a1
@@ -8,7 +9,7 @@ class SimpleCog(Cog):
 	""" Embed Module """
 	def __init__(self, bot):
 		super().__init__(bot)
-		self.settings.register("test", "default value")
+		# self.settings.register("test", "default value")
 
 	@commands.command(pass_context=True, name='embeds')
 	#  @commands.guild_only()
@@ -27,8 +28,8 @@ class SimpleCog(Cog):
 		embed.add_field(name='Embed Visualizer', value='[Click Here!](https://leovoel.github.io/embed-visualizer/)')
 		embed.add_field(name='Command Invoker', value=ctx.message.author.mention)
 		embed.set_footer(text='Made in Python with discord.py@rewrite', icon_url='http://i.imgur.com/5BFecvA.png')
-		print(ctx)
-		await ctx.send(content='**A simple Embed for discord.py@0.16.12 in cogs.**', embed=embed)
+		dmsg = DeletableMessage(sql_session=self.sql)
+		await dmsg.send(ctx, content='**A simple Embed for discord.py@0.16.12 in cogs.**', embed=embed)
 
 	@commands.command()
 	async def echo(self, ctx, arg):

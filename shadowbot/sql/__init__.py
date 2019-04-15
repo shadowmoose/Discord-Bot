@@ -38,7 +38,7 @@ def init(db_path=":memory:"):
 
 
 def _create():
-	from shadowbot.sql.message import UserMessage
+	from shadowbot.sql.message import UserMessageDB, BotMessageDB
 	Base.metadata.create_all(_engine)
 	print("\tCreated Database file.")
 	session().execute("PRAGMA journal_mode=WAL")
