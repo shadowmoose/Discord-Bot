@@ -10,18 +10,18 @@ class DiceRoller(Cog):
 		super().__init__(bot)
 
 	@commands.command()
-	async def roll(self, ctx: commands.context.Context, *args):
+	async def roll(self, ctx: commands.context.Context, *dice):
 		"""Roll some dice!
 		Usage:
 			roll [#x] (eg: "d12" or "12")
 			Example: roll 2xD20
 			Pass "roll character" to autoroll all stats. Automatically discards the lowest roll of 4, for characters."""
-		if not args:
+		if not dice:
 			return "No roll values provided!"
-		if 'char' in ''.join(args):
+		if 'char' in ''.join(dice):
 			txt, troll = self.roll_character()
 		else:
-			vals = self.roll_args(args)
+			vals = self.roll_args(dice)
 			txt, troll = self.build_response(vals)
 		msg = await ctx.send(ctx.author.mention+"\n"+txt)
 		if troll:

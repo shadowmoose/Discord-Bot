@@ -32,7 +32,7 @@ def get(key):
 
 
 def get_settings_base():
-	return os.path.dirname(_file_path)
+	return os.path.dirname(_file_path) + '/'
 
 
 def load():
@@ -62,3 +62,6 @@ class SettingWrapper:
 
 	def get(self, key):
 		return get(self._key(key))
+
+	def get_save_base(self):
+		return get_settings_base()

@@ -5,7 +5,7 @@ from shadowbot.messages.bot_messages import DeletableMessage
 
 
 # https://gist.github.com/BananaWagon/068cef8ff640e90d3636d133fa8f72a1
-class SimpleCog(Cog):
+class SimpleCog(Cog, command_attrs=dict(hidden=True)):
 	""" Embed Module """
 	def __init__(self, bot):
 		super().__init__(bot)

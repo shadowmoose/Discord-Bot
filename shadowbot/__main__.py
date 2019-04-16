@@ -8,6 +8,9 @@ import argparse
 from shadowbot.util import settings
 from shadowbot import sql
 
+# INVITE: https://discordapp.com/api/oauth2/authorize?client_id=566711902449827860&permissions=133692864&scope=bot
+
+__version__ = '2.0.1'
 
 parser = argparse.ArgumentParser(
 	description="ShadowBot Discord Bot!")
@@ -25,9 +28,7 @@ sql.init(settings.get("database"))
 
 def get_prefix(_bot, message):
 	"""A callable Prefix for our bot. This could be edited to allow per server prefixes."""
-
-	# Notice how you can use spaces in prefixes. Try to keep them simple though.
-	prefixes = ['-', '>', '/']
+	prefixes = ['>', '/']  # TODO: Add '--' after testing.
 
 	# Check to see if we are outside of a guild. e.g DM's etc.
 	if not message.guild:
@@ -43,7 +44,7 @@ def get_prefix(_bot, message):
 # This is the directory all are located in.
 cogs_dir = "cogs"
 
-bot = commands.Bot(command_prefix=get_prefix, description='A Rewrite Cog Example')
+bot = commands.Bot(command_prefix=get_prefix, description='ShadowBot v%s' % __version__)
 
 # Here we load our extensions(cogs) that are located in the cogs directory. Any file in here attempts to load.
 if __name__ == '__main__':
@@ -64,11 +65,14 @@ async def on_ready():
 	print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
 
 	# Changes our bots Playing Status. type=1(streaming) for a standard game you could remove type and url.
-	await bot.change_presence(activity=discord.Game(name="Testing"))
+	await bot.change_presence(activity=discord.Game(name="ShadowBot v%s" % __version__))
 	print(f'Successfully logged in and booted...!')
 
 
 token = settings.get("token")
+if args.token:
+	token = args.token
+	print("+Using command-line token!")
 if not token:
 	print("No token set! Please edit the generated config file!")
 	sys.exit(1)
