@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from shadowbot.cogs import Cog
+from shadowbot.cogs.user_simulator import UserSimulator
 import time
 
 
@@ -36,7 +37,7 @@ class Manager(Cog, command_attrs=dict(hidden=True)):
 	@commands.command()
 	@commands.is_owner()
 	@commands.guild_only()
-	async def load_user_messages(self, ctx: commands.context.Context):
+	async def load_user_messages(self, ctx: commands.context.Context, build_user_corpus=True):
 		""" Load all User Messages into the DB - this is slow & Admin Only. """
 		start = time.time()
 		msg: discord.Message = await ctx.send("Rebuilding User text models in Database...")
@@ -57,6 +58,9 @@ class Manager(Cog, command_attrs=dict(hidden=True)):
 							continue
 						if self.handler.store_user_message(message, commit_after=False):
 							found += 1
+							if build_user_corpus:
+								path = UserSimulator.message_to_path(message)
+								self.handler.add_message_corpus(file_path=path, message=message)
 					print("\t+Finished at:", round(time.time() - start, 2))
 		self.sql.commit()
 		for msg in sent:

@@ -71,7 +71,8 @@ class UserSimulator(Cog):
 		em.set_author(name=target.name, icon_url=target.avatar_url)
 		await ctx.send(embed=em)
 
-	def message_to_path(self, message: discord.Message):
+	@staticmethod
+	def message_to_path(message: discord.Message):
 		""" Build the filepath to save user messages to, for a given message. """
 		base = settings.get_settings_base() + '/data/messages/%s/users/' % message.guild.id
 		file = base + '%s.txt' % message.author.id
