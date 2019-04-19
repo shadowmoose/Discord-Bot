@@ -2,7 +2,11 @@ import discord
 from discord.ext import commands
 from shadowbot.cogs import Cog
 from shadowbot.cogs.user_simulator import UserSimulator
+import defusedxml
 import time
+
+
+defusedxml.defuse_stdlib()  # Monkey-patch all XML libs.
 
 
 # https://gist.github.com/BananaWagon/068cef8ff640e90d3636d133fa8f72a1
@@ -22,15 +26,16 @@ class Manager(Cog, command_attrs=dict(hidden=True)):
 	@commands.Cog.listener()
 	@commands.guild_only()
 	async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
-		print(payload.emoji.name)
 		if payload.user_id == self.bot.user.id or not payload.guild_id:
 			return
+		print('Emoji:', payload.emoji.name)
 		msg = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
 		if not msg:
 			print("Found no matching bot message for:", payload.message_id)
 			return
 		bm = self.handler.get_handler(msg)
 		if not bm:
+			print("Found no valid handler for the message reacted to!")
 			return
 		return await bm.handle_reaction(payload.emoji.name)
 

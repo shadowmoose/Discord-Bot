@@ -1,4 +1,4 @@
-from shadowbot.messages.bot_messages import DeletableMessage, BotMessage
+from shadowbot.messages.bot_messages import DeletableMessage, BotMessage, PagedMessage
 import discord
 from shadowbot.sql.message import BotMessageDB, UserMessageDB
 import os
@@ -10,7 +10,7 @@ class BotMessageHandler:
 		self.session = session
 
 	def _all_messages(self, message: discord.Message):
-		return [DeletableMessage(message)]
+		return [DeletableMessage(message=message), PagedMessage(message=message)]
 
 	def get_handler(self, message: discord.Message):
 		bm = self.session.query(BotMessageDB) \
