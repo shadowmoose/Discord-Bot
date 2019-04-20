@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from shadowbot.cogs import Cog
-from shadowbot.messages.bot_messages import DeletableMessage
+from cogs import Cog
+from messages.bot_messages import DeletableMessage
 
 
 # https://gist.github.com/BananaWagon/068cef8ff640e90d3636d133fa8f72a1

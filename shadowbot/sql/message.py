@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Integer, DateTime
-import shadowbot.sql as sql
+import sql
 
 
 class UserMessageDB(sql.Base):

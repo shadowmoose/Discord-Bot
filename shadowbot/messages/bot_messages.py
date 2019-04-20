@@ -1,5 +1,5 @@
 import discord
-from shadowbot.sql.message import BotMessageDB
+from sql.message import BotMessageDB
 import json
 from discord.ext import commands
 from abc import abstractmethod

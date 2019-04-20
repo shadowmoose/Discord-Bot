@@ -1,5 +1,5 @@
 from discord.ext import commands
-from shadowbot.cogs import Cog
+from cogs import Cog
 import random
 import re
 

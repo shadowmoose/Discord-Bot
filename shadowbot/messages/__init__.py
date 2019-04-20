@@ -1,6 +1,6 @@
-from shadowbot.messages.bot_messages import DeletableMessage, BotMessage, PagedMessage
+from messages.bot_messages import DeletableMessage, BotMessage, PagedMessage
 import discord
-from shadowbot.sql.message import BotMessageDB, UserMessageDB
+from sql.message import BotMessageDB, UserMessageDB
 import os
 import re
 

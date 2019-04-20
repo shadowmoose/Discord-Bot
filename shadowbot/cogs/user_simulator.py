@@ -1,6 +1,6 @@
 from discord.ext import commands
-from shadowbot.cogs import Cog
-from shadowbot.util import settings
+from cogs import Cog
+from util import settings
 import os
 import markovify
 import random

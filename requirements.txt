@@ -1,7 +1,6 @@
 discord.py==1.0.1
 sqlalchemy
 markovify
-PoE.py
 Pillow
 beautifulsoup4
 PoE.py==2.0.1a0
@@ -9,3 +8,4 @@ aiohttp
 cchardet
 aiodns
 defusedxml
+urllib3

@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from shadowbot.cogs import Cog
-from shadowbot.cogs.user_simulator import UserSimulator
+from cogs import Cog
+from cogs.user_simulator import UserSimulator
 import defusedxml
 import time
 

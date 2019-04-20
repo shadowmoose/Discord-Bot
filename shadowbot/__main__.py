@@ -2,11 +2,11 @@ import discord
 from discord.ext import commands
 from os import listdir
 import sys
-from os.path import isfile, join
+from os.path import isfile, join, dirname, abspath
 import traceback
 import argparse
-from shadowbot.util import settings
-from shadowbot import sql
+from util import settings
+import sql
 
 # INVITE: https://discordapp.com/api/oauth2/authorize?client_id=566711902449827860&permissions=133692864&scope=bot
 
@@ -42,8 +42,9 @@ def get_prefix(_bot, message):
 # Below cogs represents our folder our cogs are in. Following is the file name. So 'meme.py' in cogs, would be cogs.meme
 # Think of it like a dot path import
 # This is the directory all are located in.
-cogs_dir = "cogs"
-
+cogs_base = 'cogs'
+cogs_dir = abspath(dirname(__file__) + '/' + cogs_base)
+sys.path.insert(0, cogs_dir)
 bot = commands.Bot(command_prefix=get_prefix, description='ShadowBot v%s' % __version__)
 
 # Here we load our extensions(cogs) that are located in the cogs directory. Any file in here attempts to load.
@@ -52,7 +53,7 @@ if __name__ == '__main__':
 		if '_init_' in extension:
 			continue
 		try:
-			bot.load_extension(cogs_dir + "." + extension)
+			bot.load_extension(extension)
 		except (discord.ClientException, ModuleNotFoundError):
 			print(f'Failed to load extension {extension}.')
 			traceback.print_exc()

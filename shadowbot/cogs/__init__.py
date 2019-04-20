@@ -1,9 +1,9 @@
-import shadowbot.util.settings as settings
-import shadowbot.sql as sql
+import util.settings as settings
+import sql as sql
 from discord.ext import commands
 from sqlalchemy.orm.session import Session
 from discord.ext.commands.bot import Bot
-from shadowbot.messages import BotMessageHandler
+from messages import BotMessageHandler
 
 
 class Cog(commands.Cog):

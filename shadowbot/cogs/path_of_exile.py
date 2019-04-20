@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
-from shadowbot.cogs import Cog
+from cogs import Cog
 import io
 import concurrent.futures
-from shadowbot.messages.bot_messages import DeletableMessage, PagedMessage
+from messages.bot_messages import DeletableMessage, PagedMessage
 import aiohttp
 import re
 import base64
