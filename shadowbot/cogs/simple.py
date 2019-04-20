@@ -39,4 +39,4 @@ class SimpleCog(Cog, command_attrs=dict(hidden=True)):
 
 # When we load the cog, we use the name of the file.
 def setup(bot):
-	bot.add_cog(SimpleCog(bot))
+	pass
