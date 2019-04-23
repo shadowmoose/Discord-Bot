@@ -28,7 +28,7 @@ sql.init(settings.get("database"))
 
 def get_prefix(_bot, message):
 	"""A callable Prefix for our bot. This could be edited to allow per server prefixes."""
-	prefixes = ['>', '/']  # TODO: Add '--' after testing.
+	prefixes = ['>', '/']
 
 	# Check to see if we are outside of a guild. e.g DM's etc.
 	if not message.guild:
@@ -39,13 +39,11 @@ def get_prefix(_bot, message):
 	return commands.when_mentioned_or(*prefixes)(_bot, message)
 
 
-# Below cogs represents our folder our cogs are in. Following is the file name. So 'meme.py' in cogs, would be cogs.meme
-# Think of it like a dot path import
 # This is the directory all are located in.
 cogs_base = 'cogs'
 cogs_dir = abspath(dirname(__file__) + '/' + cogs_base)
 sys.path.insert(0, cogs_dir)
-bot = commands.Bot(command_prefix=get_prefix, description='ShadowBot v%s' % __version__)
+bot = commands.Bot(command_prefix=get_prefix, description='ShadowBot v%s' % __version__, case_insensitive=True)
 
 # Here we load our extensions(cogs) that are located in the cogs directory. Any file in here attempts to load.
 if __name__ == '__main__':
@@ -62,10 +60,7 @@ if __name__ == '__main__':
 @bot.event
 async def on_ready():
 	"""http://discordpy.readthedocs.io/en/rewrite/api.html#discord.on_ready"""
-
 	print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
-
-	# Changes our bots Playing Status. type=1(streaming) for a standard game you could remove type and url.
 	await bot.change_presence(activity=discord.Game(name="ShadowBot v%s" % __version__))
 	print(f'Successfully logged in and booted...!')
 

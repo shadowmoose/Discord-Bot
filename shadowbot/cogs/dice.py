@@ -18,7 +18,7 @@ class DiceRoller(Cog):
 			Pass "roll character" to autoroll all stats. Automatically discards the lowest roll of 4, for characters."""
 		if not dice:
 			return "No roll values provided!"
-		if 'char' in ''.join(dice):
+		if 'char' in (''.join(dice)).lower():
 			txt, troll = self.roll_character()
 		else:
 			vals = self.roll_args(dice)
@@ -49,7 +49,7 @@ class DiceRoller(Cog):
 		multi = re.match(r"(\d+)(\D+)(\d+)", txt)
 		if multi:
 			mx = min(1000, int(multi.group(3)))
-			amount = min(int(multi.group(1)), 20)
+			amount = min(int(multi.group(1)), 50)
 			if mx not in vals:
 				vals[mx] = []
 			for i in range(amount):
