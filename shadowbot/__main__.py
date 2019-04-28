@@ -10,7 +10,7 @@ import sql
 
 # INVITE: https://discordapp.com/api/oauth2/authorize?client_id=566711902449827860&permissions=133692864&scope=bot
 
-__version__ = '2.0.1'
+__version__ = '2.0.2'
 
 parser = argparse.ArgumentParser(
 	description="ShadowBot Discord Bot!")
@@ -29,11 +29,6 @@ sql.init(settings.get("database"))
 def get_prefix(_bot, message):
 	"""A callable Prefix for our bot. This could be edited to allow per server prefixes."""
 	prefixes = ['>', '/']
-
-	# Check to see if we are outside of a guild. e.g DM's etc.
-	if not message.guild:
-		# Only allow ? to be used in DMs
-		return '?'
 
 	# If we are in a guild, we allow for the user to mention us or use any of the prefixes in our list.
 	return commands.when_mentioned_or(*prefixes)(_bot, message)
