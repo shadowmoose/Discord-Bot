@@ -10,7 +10,7 @@ import sql
 
 # INVITE: https://discordapp.com/api/oauth2/authorize?client_id=566711902449827860&permissions=133692864&scope=bot
 
-__version__ = '2.0.2'
+__version__ = '2.0.3'
 
 parser = argparse.ArgumentParser(
 	description="ShadowBot Discord Bot!")

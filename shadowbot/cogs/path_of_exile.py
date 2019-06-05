@@ -188,8 +188,7 @@ class PoeParser:
 			base = self._xml('.//Build')[0]
 			main_idx = int(base.attrib['mainSocketGroup']) - 1
 			for idx, group in enumerate(self._xml('.//Skill')):
-				if 'Swap' in group.attrib['slot']:
-					continue
+				print('attr:', group.attrib)
 				main_group = sorted(group, key=lambda x: 'gemId' in x and 'Support' in x.attrib['gemId'])
 				names = [n.attrib['nameSpec'] for n in main_group]
 				names = list(filter(lambda x: not any(e in x.lower() for e in ['edict', 'command of', 'decree of']), names))
@@ -246,6 +245,9 @@ class PoeParser:
 		for slot, arr in self.json['equipped'].items():
 			if 'swap' in slot.lower():
 				continue
+			if 'gem_groups' in slot.lower():
+				continue
+			print(slot, arr)
 			name = arr['parsed']['name']
 			if arr['parsed']['rarity'].lower() != 'unique':
 				name = '%s (%s)' % (arr['parsed']['base'], arr['parsed']['rarity'])
